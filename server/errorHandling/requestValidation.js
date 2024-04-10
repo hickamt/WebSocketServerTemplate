@@ -13,7 +13,7 @@ const validateTextGenerationObject = async (request) => {
   if (!request) {
     throw new Error("Request object is undefined");
   }
-  
+
   if (!request.type || typeof request.type !== "string") {
     throw new Error("Invalid or missing aiModelType");
   }
@@ -22,8 +22,6 @@ const validateTextGenerationObject = async (request) => {
   if (!request.aiModelName || typeof request.aiModelName !== "string") {
     throw new Error("Invalid or missing aiModelName");
   }
-
-  
 
   if (!request.aiModelURL || typeof request.aiModelURL !== "string") {
     throw new Error("Invalid or missing aiModelURL");

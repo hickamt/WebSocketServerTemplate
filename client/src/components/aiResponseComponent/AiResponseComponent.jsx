@@ -39,6 +39,12 @@ function AiResponseComponent() {
           <p>{textGenerationData.generatedText}</p>
         </div>
       )}
+
+      {textGenerationData && (
+        <div className="text-generation-container">
+          <pre>{textGenerationData}</pre>
+        </div>
+      )}
     </div>
   );
 }

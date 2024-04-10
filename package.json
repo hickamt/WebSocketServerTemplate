@@ -15,7 +15,7 @@
     "react": "cd client && yarn dev"
   },
   "repository": "https://github.com/hickamt/WebSocketServerTemplate.git",
-  "author": "todd <thickam@outlook.com>",
+  "author": "Todd Hickam",
   "license": "MIT",
   "dependencies": {
     "concurrently": "8.2.2"
