@@ -1,0 +1,32 @@
+[
+  {
+    "type": "joke",
+    "date": "2024-04-10",
+    "source": "chatGPTv4",
+    "joke": "Why do programmers always mix up Halloween and Christmas? Because Oct 31 equals Dec 25."
+  },
+  {
+    "type": "joke",
+    "date": "2024-04-10",
+    "source": "chatGPTv4",
+    "joke": "There are 10 types of people in the world: those who understand binary, and those who don't."
+  },
+  {
+    "type": "joke",
+    "date": "2024-04-10",
+    "source": "chatGPTv4",
+    "joke": "Why was the JavaScript developer sad? Because he didn't Node how to Express himself."
+  },
+  {
+    "type": "joke",
+    "date": "2024-04-10",
+    "source": "chatGPTv4",
+    "joke": "Why do Java developers wear glasses? Because they can't C#."
+  },
+  {
+    "type": "joke",
+    "date": "2024-04-10",
+    "source": "chatGPTv4",
+    "joke": "How many programmers does it take to change a light bulb? None, that's a hardware problem."
+  }
+]

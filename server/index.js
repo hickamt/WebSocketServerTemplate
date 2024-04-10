@@ -1,5 +1,5 @@
 const WebSocket = require("ws");
-const { textGenerationAPI } = require("./huggingfaceAPI/textGenerationAPI");
+const { mockAPI } = require("./mockAPI/mockAPI");
 
 const wss = new WebSocket.Server({ port: 5500 });
 
@@ -14,7 +14,7 @@ wss.on("connection", (ws) => {
     "WebSocket connection established. Listening on http://localhost:5500"
   );
 
-  // Set up ping-pong mechanism
+  // Set up ping-pong mechanism to keep alive
   ws.isAlive = true;
   ws.on("pong", heartbeat);
 
@@ -34,10 +34,8 @@ wss.on("connection", (ws) => {
       // Assuming messages are JSON with a type property
       const request = JSON.parse(message);
 
-      if (request.type === "textGeneration") {
-        const response = await textGenerationAPI(request); // Process the request
-        ws.send(JSON.stringify(response));
-      }
+      const response = await mockAPI(request); // Process the request
+      ws.send(JSON.stringify(response));
 
       // Add more request types as needed
     } catch (error) {
@@ -50,3 +48,28 @@ wss.on("connection", (ws) => {
   ws.on("close", () => clearInterval(interval));
   heartbeat.call(ws);
 });
+
+/**
+ * LISTEN FOR 'SIGINT' OR 'SIGTERM'
+ * TO SHUTDOWN THE SERVER
+ */
+function shutdown() {
+  console.log("Shutting down...");
+
+  // Close all WebSocket connections
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.close();
+    }
+  });
+
+  // Close the WebSocket server
+  wss.close(() => {
+    console.log("WebSocket server closed");
+    process.exit(0);
+  });
+}
+
+// Listen for shutdown signals
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);

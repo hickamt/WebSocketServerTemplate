@@ -1,0 +1,13 @@
+/* MENU */
+.menu-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: var(--grey); */
+  width: 100%;
+}
+
+.menu-bar p:hover {
+  border-bottom: 1px solid var(--white);
+}

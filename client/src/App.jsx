@@ -1,10 +1,9 @@
-import AiResponseComponent from "./components/aiResponseComponent/AiResponseComponent";
+import Interface from "./components/interface/Interface";
 
 function App() {
   return (
     <div className="app-container">
-      <h1>Just a Test</h1>
-      <AiResponseComponent />
+      <Interface />
     </div>
   );
 }

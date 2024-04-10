@@ -25,6 +25,8 @@ const SocketDataProvider = ({ children }) => {
 
   useEffect(() => {
     setConnectionState(CONNECTION_STATES.CONNECTING);
+
+    // Set websocket connection for backend server listening on 5500
     socket.current = new WebSocket("ws://localhost:5500");
 
     socket.current.onopen = () => {
@@ -42,13 +44,13 @@ const SocketDataProvider = ({ children }) => {
       console.error("WebSocket error:", event);
     };
 
+    // Update state as changes occur on context objects
     socket.current.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.type === "textGeneration") {
-          console.log("Received new server message: ", data)
-          setTextGenerationData(data);
-        }
+        // if (data.type === "textGeneration") {
+        setTextGenerationData(data);
+        // }
       } catch (error) {
         console.error("Error parsing message:", error);
         setConnectionState(CONNECTION_STATES.ERROR);

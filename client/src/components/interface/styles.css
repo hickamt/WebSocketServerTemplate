@@ -1,0 +1,31 @@
+.ai-response-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Response Data Container */
+.response-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em auto;
+  padding: 0.5em;
+  width: 100%;
+  min-height: 55vh;
+  max-height: 55vh;
+  background-color: var(--grey);
+  color: var(--white);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* INPUT */
+.user-input {
+  min-width: 75%;
+  max-width: 75%;
+  min-height: 10vh;
+  max-height: 25vh;
+  padding: 0.25em;
+}

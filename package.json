@@ -4,9 +4,9 @@
   "description": "websocket server and client application template",
   "main": "index.js",
   "scripts": {
-    "teardown": "npm run uninstall_package_lock && npm run uninstall_node_modules",
-    "uninstall_package_lock": "rm package-lock.json && cd server && rm package-lock.json && cd ../client && rm package-lock.json",
-    "uninstall_node_modules": "rm -rf node_modules && cd server && rm -rf node_modules && cd ../client && rm -rf node_modules",
+    "teardown": "npm run teardown_server && npm run teardown_client",
+    "teardown_server": "cd server && rm -rf node_modules .env package-lock.json yarn.lock",
+    "teardown_client": "cd client && rm -rf node_modules .env package-lock.json yarn.lock",
     "setup": "npm i -y && cd server && npm i -y && cd ../client && npm i -y",
     "save": "git add . && git commit -m 'quick save'",
     "devcode": "code . && npm run dev",
