@@ -69,9 +69,9 @@ function AiResponseComponent() {
             {responseData.map((data) => {
               switch (data.response.type) {
                 case "joke":
-                  return <JokeResponse data={data} />;
+                  return <JokeResponse key={data.uid} data={data} />;
                 case "fact":
-                  return <FactResponse data={data} />;
+                  return <FactResponse key={data.uid} data={data} />;
                 default:
                   return;
               }
