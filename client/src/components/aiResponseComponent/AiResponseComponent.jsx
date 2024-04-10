@@ -9,6 +9,7 @@ import { v4 as uuid } from "uuid";
 
 // Components
 import MenuBar from "../menuBar/MenuBar";
+import TextGenerationResponse from "../textGenerationResponse/TextGenerationResponse";
 
 // Styles
 import "./styles.css";
@@ -66,18 +67,13 @@ function AiResponseComponent() {
 
         {responseData.length > 0 ? (
           <div className="response-container">
-            {responseData.map((data, index) => {
-              return (
-                <div key={index} className="response-item">
-                  <pre>Date: {data.timestamp}</pre>
-                  <pre>UID: {data.uid}</pre>
-                  <pre>Model Name: {data.aiModelName}</pre>
-                  <pre>Model URL: {data.aiModelURL}</pre>
-                  <pre>Model Type: {data.type}</pre>
-                  <pre className="prompt">Prompt: {data.prompt}</pre>
-                  <pre className="response">Response: {data.response}</pre>
-                </div>
-              );
+            {responseData.map((data) => {
+              switch (data.type) {
+                case "textGeneration":
+                  return <TextGenerationResponse key={data.uid} data={data} />;
+                default:
+                  return;
+              }
             })}
           </div>
         ) : (

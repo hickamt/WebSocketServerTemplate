@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-/* Response and Prompt Display */
+/* Response Data Container */
 .response-container {
   display: flex;
   flex-direction: column;
@@ -19,24 +19,6 @@
   color: var(--white);
   overflow-y: auto;
   scrollbar-width: thin;
-}
-
-.response-item {
-  display: flex;
-  flex-direction: column;
-  width: 75%;
-  justify-self: center;
-  margin: 0.25em;
-  margin-bottom: 1em;
-  color: var(--white);
-}
-
-.prompt {
-  margin-bottom: 0.25em;
-}
-
-.response {
-  background-color: rgb(81, 81, 81);
 }
 
 /* INPUT */
