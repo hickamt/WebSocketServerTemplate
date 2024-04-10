@@ -47,26 +47,30 @@ function AiResponseComponent() {
           <p>MENU TITLE</p>
           <p>Settings Icon</p>
         </div>
+
         {responseData.length > 0 ? (
-          responseData.map((data, index) => {
-            return (
-              <div key={index} className="response-container">
-                <pre className="response-item">Prompt: {data.prompt}</pre>
-                <pre className="response-item">Response: {data.response}</pre>
-              </div>
-            );
-          })
+          <div className="response-container">
+            {responseData.map((data, index) => {
+              return (
+                <div key={index} className="response-item">
+                  <pre className="prompt">Prompt: {data.prompt}</pre>
+                  <pre className="response">Response: {data.response}</pre>
+                </div>
+              );
+            })}
+          </div>
         ) : (
           <div className="response-container">Nothing to display</div>
         )}
 
-        <input
+        <textarea
+          className="user-input"
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
         <div>
-          <button onClick={handleSubmit}>Generate Text</button>
+          <button onClick={handleSubmit}>SUBMIT</button>
         </div>
       </div>
     )
