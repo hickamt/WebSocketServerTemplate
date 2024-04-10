@@ -1,9 +1,9 @@
-import AiResponseComponent from "./components/aiResponseComponent/AiResponseComponent";
+import Interface from "./components/interface/Interface";
 
 function App() {
   return (
     <div className="app-container">
-      <AiResponseComponent />
+      <Interface />
     </div>
   );
 }

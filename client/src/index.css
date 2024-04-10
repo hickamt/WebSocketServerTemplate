@@ -9,12 +9,13 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --white: rgba(247, 247, 247, 0.94);
-  --black: rgb(12, 12, 12);
-  --blue: blue;
-  --green: green;
+  /* Global Color Scheme */
+  --white: #f7f7f7f0;
+  --black: #0c0c0c;
+  --blue: #0000c7;
+  --green: #007500;
   --grey: #242424;
-  --red: red;
+  --red: #db0000;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);

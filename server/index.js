@@ -14,7 +14,7 @@ wss.on("connection", (ws) => {
     "WebSocket connection established. Listening on http://localhost:5500"
   );
 
-  // Set up ping-pong mechanism
+  // Set up ping-pong mechanism to keep alive
   ws.isAlive = true;
   ws.on("pong", heartbeat);
 
@@ -34,10 +34,8 @@ wss.on("connection", (ws) => {
       // Assuming messages are JSON with a type property
       const request = JSON.parse(message);
 
-      // if (request.type === "textGeneration") {
-        const response = await mockAPI(request); // Process the request
-        ws.send(JSON.stringify(response));
-      // }
+      const response = await mockAPI(request); // Process the request
+      ws.send(JSON.stringify(response));
 
       // Add more request types as needed
     } catch (error) {
