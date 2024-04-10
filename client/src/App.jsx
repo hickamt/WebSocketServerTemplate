@@ -3,7 +3,6 @@ import AiResponseComponent from "./components/aiResponseComponent/AiResponseComp
 function App() {
   return (
     <div className="app-container">
-      <h1>Just a Test</h1>
       <AiResponseComponent />
     </div>
   );

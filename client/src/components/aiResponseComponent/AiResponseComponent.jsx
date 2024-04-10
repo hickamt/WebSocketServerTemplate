@@ -6,6 +6,8 @@
 import { useContext, useEffect, useState } from "react";
 import { WebSocketContext } from "../socketDataProvider/SocketDataProvider";
 
+import "./styles.css";
+
 function AiResponseComponent() {
   const { connectionState, textGenerationData, sendTextGenerationRequest } =
     useContext(WebSocketContext);
@@ -39,7 +41,25 @@ function AiResponseComponent() {
 
   return (
     connectionState === "OPEN" && (
-      <div>
+      <div className="ai-response-component">
+        <div className="menu-bar">
+          <p>LoadAnimation</p>
+          <p>MENU TITLE</p>
+          <p>Settings Icon</p>
+        </div>
+        {responseData.length > 0 ? (
+          responseData.map((data, index) => {
+            return (
+              <div key={index} className="response-container">
+                <pre className="response-item">Prompt: {data.prompt}</pre>
+                <pre className="response-item">Response: {data.response}</pre>
+              </div>
+            );
+          })
+        ) : (
+          <div className="response-container">Nothing to display</div>
+        )}
+
         <input
           type="text"
           value={inputText}
@@ -48,15 +68,6 @@ function AiResponseComponent() {
         <div>
           <button onClick={handleSubmit}>Generate Text</button>
         </div>
-
-        {responseData &&
-          responseData.map((data, index) => {
-            return <div key={index}>
-              <h2>Chat {index}:</h2>
-              <pre>Prompt: {data.prompt}</pre>
-              <pre>Response: {data.response}</pre>
-            </div>;
-          })}
       </div>
     )
   );
