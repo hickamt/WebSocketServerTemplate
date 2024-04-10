@@ -5,8 +5,18 @@
  */
 import { useContext, useEffect, useState } from "react";
 import { WebSocketContext } from "../socketDataProvider/SocketDataProvider";
+import { v4 as uuid } from "uuid";
+import { IoSettingsOutline } from "react-icons/io5";
 
 import "./styles.css";
+
+const formattedTimestamp = () => {
+  const date = new Date();
+  const options = { timeZone: "America/Los_Angeles", hour12: false };
+  const formatter = new Intl.DateTimeFormat("en-US", options);
+  const timestamp = formatter.format(date);
+  return timestamp;
+};
 
 function AiResponseComponent() {
   const { connectionState, textGenerationData, sendTextGenerationRequest } =
@@ -21,6 +31,11 @@ function AiResponseComponent() {
     }
   }, [textGenerationData]);
 
+  const handleClear = () => {
+    setInputText("");
+    setResponseData([]);
+  };
+
   const handleSubmit = () => {
     if (connectionState === "CLOSED") {
       console.error(
@@ -28,15 +43,17 @@ function AiResponseComponent() {
       );
     }
     const newRequest = {
-      type: "textGeneration",
-      prompt: inputText,
       aiModelName: "Mixtral",
       aiModelURL: "URL_path_for_mixtral",
+      prompt: inputText,
+      type: "textGeneration",
+      uid: uuid(),
+      timestamp: formattedTimestamp(),
     };
 
     // Send a text generation request when the button is clicked
     sendTextGenerationRequest(newRequest);
-    console.log("AiResponseComponent Data: ", textGenerationData);
+    setInputText("");
   };
 
   return (
@@ -44,8 +61,8 @@ function AiResponseComponent() {
       <div className="ai-response-component">
         <div className="menu-bar">
           <p>LoadAnimation</p>
-          <p>MENU TITLE</p>
-          <p>Settings Icon</p>
+          <h1>Websocket Server Template</h1>
+          <IoSettingsOutline size={20}/>
         </div>
 
         {responseData.length > 0 ? (
@@ -53,6 +70,11 @@ function AiResponseComponent() {
             {responseData.map((data, index) => {
               return (
                 <div key={index} className="response-item">
+                  <pre>Date: {data.timestamp}</pre>
+                  <pre>UID: {data.uid}</pre>
+                  <pre>Model Name: {data.aiModelName}</pre>
+                  <pre>Model URL: {data.aiModelURL}</pre>
+                  <pre>Model Type: {data.type}</pre>
                   <pre className="prompt">Prompt: {data.prompt}</pre>
                   <pre className="response">Response: {data.response}</pre>
                 </div>
@@ -60,7 +82,7 @@ function AiResponseComponent() {
             })}
           </div>
         ) : (
-          <div className="response-container">Nothing to display</div>
+          <div className="response-container">Type and send a message</div>
         )}
 
         <textarea
@@ -69,8 +91,9 @@ function AiResponseComponent() {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <div>
+        <div className="button-container">
           <button onClick={handleSubmit}>SUBMIT</button>
+          <button onClick={handleClear}>CLEAR</button>
         </div>
       </div>
     )
