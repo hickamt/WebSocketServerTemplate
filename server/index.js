@@ -26,7 +26,7 @@ wss.on("connection", (ws) => {
     }
 
     ws.isAlive = false;
-    ws.ping(null, false, true);
+    ws.ping();
   }, 30000); // Adjust interval as needed (e.g., every 30 seconds)
 
   ws.on("message", async (message) => {

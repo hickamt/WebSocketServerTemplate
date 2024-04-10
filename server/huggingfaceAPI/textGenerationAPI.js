@@ -1,8 +1,8 @@
 require("dotenv").config();
 
-const {
-  validateTextGenerationObject,
-} = require("../errorHandling/requestValidation");
+// const {
+//   validateTextGenerationObject,
+// } = require("../errorHandling/requestValidation");
 
 /**
  * Text Generation API call to Huggingface which requires the request object contain
@@ -15,7 +15,7 @@ const textGenerationAPI = async (request) => {
   console.log("Server Side Received A Request: ", request);
   const responseData =
     "This is a successful test of the websocket api call and response.";
-  validateTextGenerationObject(request);
+  // validateTextGenerationObject(request);
   return { ...request, response: responseData };
   // try {
   //   validateTextGenerationObject(request);

@@ -7,22 +7,28 @@ import { useContext, useState } from "react";
 import { WebSocketContext } from "../socketDataProvider/SocketDataProvider";
 
 function AiResponseComponent() {
-  const { sendTextGenerationRequest, textGenerationData } =
+  const { connectionState, textGenerationData, sendTextGenerationRequest } =
     useContext(WebSocketContext);
   const [inputText, setInputText] = useState("");
 
   const handleSubmit = () => {
+    if (connectionState === "CLOSED") {
+      console.error(
+        "Unable to submit the request. WebSocket connection is closed"
+      );
+    }
     const newRequest = {
       type: "textGeneration",
       prompt: inputText,
       aiModelName: "Mixtral",
       aiModelURL: "URL_path_for_mixtral",
-    }
+    };
+
     // Send a text generation request when the button is clicked
     sendTextGenerationRequest(newRequest);
   };
 
-  return (
+  return connectionState === "OPEN" && (
     <div>
       <input
         type="text"
@@ -37,12 +43,6 @@ function AiResponseComponent() {
         <div>
           <h2>Generated Text:</h2>
           <p>{textGenerationData.generatedText}</p>
-        </div>
-      )}
-
-      {textGenerationData && (
-        <div className="text-generation-container">
-          <pre>{textGenerationData}</pre>
         </div>
       )}
     </div>
