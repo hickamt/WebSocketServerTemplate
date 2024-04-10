@@ -40,6 +40,7 @@
   width: 75%;
   justify-self: center;
   margin: 0.25em;
+  margin-bottom: 1em;
   color: var(--white);
 }
 
