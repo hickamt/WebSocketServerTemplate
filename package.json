@@ -1,0 +1,23 @@
+{
+  "name": "websocket_server_template",
+  "version": "1.0.0",
+  "description": "websocket server and client application template",
+  "main": "index.js",
+  "scripts": {
+    "teardown": "npm run uninstall_package_lock && npm run uninstall_node_modules",
+    "uninstall_package_lock": "rm package-lock.json && cd server && rm package-lock.json && cd ../client && rm package-lock.json",
+    "uninstall_node_modules": "rm -rf node_modules && cd server && rm -rf node_modules && cd ../client && rm -rf node_modules",
+    "setup": "npm i -y && cd server && npm i -y && cd ../client && npm i -y",
+    "save": "git add . && git commit -m 'quick save'",
+    "devcode": "code . && npm run dev",
+    "dev": "concurrently \"npm run express\" \"npm run react\" ",
+    "express": "cd server && npm run dev",
+    "react": "cd client && yarn dev"
+  },
+  "repository": "https://github.com/hickamt/WebSocketServerTemplate.git",
+  "author": "todd <thickam@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "8.2.2"
+  }
+}
