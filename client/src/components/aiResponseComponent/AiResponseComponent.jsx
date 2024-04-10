@@ -3,13 +3,21 @@
  * It will need to make a request to your websocket server,
  * which will then communicate with the AI model.
  */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { WebSocketContext } from "../socketDataProvider/SocketDataProvider";
 
 function AiResponseComponent() {
   const { connectionState, textGenerationData, sendTextGenerationRequest } =
     useContext(WebSocketContext);
   const [inputText, setInputText] = useState("");
+  const [responseData, setResponseData] = useState([]);
+
+  useEffect(() => {
+    if (textGenerationData) {
+      console.log("inside useEffect(): ", textGenerationData);
+      setResponseData((prev) => [...prev, textGenerationData]);
+    }
+  }, [textGenerationData]);
 
   const handleSubmit = () => {
     if (connectionState === "CLOSED") {
@@ -26,26 +34,31 @@ function AiResponseComponent() {
 
     // Send a text generation request when the button is clicked
     sendTextGenerationRequest(newRequest);
+    console.log("AiResponseComponent Data: ", textGenerationData);
   };
 
-  return connectionState === "OPEN" && (
-    <div>
-      <input
-        type="text"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-      />
+  return (
+    connectionState === "OPEN" && (
       <div>
-        <button onClick={handleSubmit}>Generate Text</button>
-      </div>
-
-      {textGenerationData && (
+        <input
+          type="text"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        />
         <div>
-          <h2>Generated Text:</h2>
-          <p>{textGenerationData.generatedText}</p>
+          <button onClick={handleSubmit}>Generate Text</button>
         </div>
-      )}
-    </div>
+
+        {responseData &&
+          responseData.map((data, index) => {
+            return <div key={index}>
+              <h2>Chat {index}:</h2>
+              <pre>Prompt: {data.prompt}</pre>
+              <pre>Response: {data.response}</pre>
+            </div>;
+          })}
+      </div>
+    )
   );
 }
 
