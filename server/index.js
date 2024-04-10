@@ -50,3 +50,28 @@ wss.on("connection", (ws) => {
   ws.on("close", () => clearInterval(interval));
   heartbeat.call(ws);
 });
+
+/**
+ * LISTEN FOR 'SIGINT' OR 'SIGTERM'
+ * TO SHUTDOWN THE SERVER
+ */
+function shutdown() {
+  console.log('Shutting down...');
+
+  // Close all WebSocket connections
+  wss.clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.close();
+    }
+  });
+
+  // Close the WebSocket server
+  wss.close(() => {
+    console.log('WebSocket server closed');
+    process.exit(0);
+  });
+}
+
+// Listen for shutdown signals
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
