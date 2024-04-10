@@ -6,8 +6,11 @@
 import { useContext, useEffect, useState } from "react";
 import { WebSocketContext } from "../socketDataProvider/SocketDataProvider";
 import { v4 as uuid } from "uuid";
-import { IoSettingsOutline } from "react-icons/io5";
 
+// Components
+import MenuBar from "../menuBar/MenuBar";
+
+// Styles
 import "./styles.css";
 
 const formattedTimestamp = () => {
@@ -59,11 +62,7 @@ function AiResponseComponent() {
   return (
     connectionState === "OPEN" && (
       <div className="ai-response-component">
-        <div className="menu-bar">
-          <p>LoadAnimation</p>
-          <h1>Websocket Server Template</h1>
-          <IoSettingsOutline size={20}/>
-        </div>
+        <MenuBar />
 
         {responseData.length > 0 ? (
           <div className="response-container">
