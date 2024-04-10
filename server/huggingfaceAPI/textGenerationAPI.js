@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const {
   validateTextGenerationObject,
-} = require("../errorHandling/objectVerification");
+} = require("../errorHandling/requestValidation");
 
 /**
  * Text Generation API call to Huggingface which requires the request object contain
