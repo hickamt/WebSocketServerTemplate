@@ -48,10 +48,10 @@ const SocketDataProvider = ({ children }) => {
     socket.current.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.type === "textGeneration") {
+        // if (data.type === "textGeneration") {
           console.log("Received new server message: ", data)
           setTextGenerationData(data);
-        }
+        // }
       } catch (error) {
         console.error("Error parsing message:", error);
         setConnectionState(CONNECTION_STATES.ERROR);

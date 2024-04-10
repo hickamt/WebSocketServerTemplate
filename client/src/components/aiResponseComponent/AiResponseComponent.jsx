@@ -9,7 +9,8 @@ import { v4 as uuid } from "uuid";
 
 // Components
 import MenuBar from "../menuBar/MenuBar";
-import TextGenerationResponse from "../textGenerationResponse/TextGenerationResponse";
+import FactResponse from "../factResponse/FactResponse";
+import JokeResponse from "../jokeResponse/JokeResponse";
 import ButtonSelection from "../buttonSelection/ButtonSelection";
 
 // Styles
@@ -48,10 +49,9 @@ function AiResponseComponent() {
       );
     }
     const newRequest = {
-      aiModelName: "Mixtral",
-      aiModelURL: "URL_path_for_mixtral",
+      userName: "UserName",
       prompt: inputText,
-      type: "textGeneration",
+      type: "Surprise Me",
       uid: uuid(),
       timestamp: formattedTimestamp(),
     };
@@ -68,9 +68,12 @@ function AiResponseComponent() {
         {responseData.length > 0 ? (
           <div className="response-container">
             {responseData.map((data) => {
-              switch (data.type) {
-                case "textGeneration":
-                  return <TextGenerationResponse key={data.uid} data={data} />;
+              console.log("Client Has Data: ", data)
+              switch (data.response.type) {
+                case "joke":
+                  return <JokeResponse data={data} />;
+                case "fact":
+                  return <FactResponse data={data} />;
                 default:
                   return;
               }
@@ -85,7 +88,10 @@ function AiResponseComponent() {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <ButtonSelection />
+        <ButtonSelection
+          handleSubmit={handleSubmit}
+          handleClear={handleClear}
+        />
       </div>
     )
   );

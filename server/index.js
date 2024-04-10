@@ -1,5 +1,5 @@
 const WebSocket = require("ws");
-const { textGenerationAPI } = require("./huggingfaceAPI/textGenerationAPI");
+const { mockAPI } = require("./mockAPI/mockAPI");
 
 const wss = new WebSocket.Server({ port: 5500 });
 
@@ -34,10 +34,10 @@ wss.on("connection", (ws) => {
       // Assuming messages are JSON with a type property
       const request = JSON.parse(message);
 
-      if (request.type === "textGeneration") {
-        const response = await textGenerationAPI(request); // Process the request
+      // if (request.type === "textGeneration") {
+        const response = await mockAPI(request); // Process the request
         ws.send(JSON.stringify(response));
-      }
+      // }
 
       // Add more request types as needed
     } catch (error) {
@@ -56,10 +56,10 @@ wss.on("connection", (ws) => {
  * TO SHUTDOWN THE SERVER
  */
 function shutdown() {
-  console.log('Shutting down...');
+  console.log("Shutting down...");
 
   // Close all WebSocket connections
-  wss.clients.forEach(client => {
+  wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.close();
     }
@@ -67,11 +67,11 @@ function shutdown() {
 
   // Close the WebSocket server
   wss.close(() => {
-    console.log('WebSocket server closed');
+    console.log("WebSocket server closed");
     process.exit(0);
   });
 }
 
 // Listen for shutdown signals
-process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown);
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);
