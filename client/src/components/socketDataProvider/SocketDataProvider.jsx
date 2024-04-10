@@ -49,8 +49,7 @@ const SocketDataProvider = ({ children }) => {
       try {
         const data = JSON.parse(event.data);
         // if (data.type === "textGeneration") {
-          console.log("Received new server message: ", data)
-          setTextGenerationData(data);
+        setTextGenerationData(data);
         // }
       } catch (error) {
         console.error("Error parsing message:", error);

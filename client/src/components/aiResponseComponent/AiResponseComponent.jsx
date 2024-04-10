@@ -32,7 +32,6 @@ function AiResponseComponent() {
 
   useEffect(() => {
     if (textGenerationData) {
-      console.log("inside useEffect(): ", textGenerationData);
       setResponseData((prev) => [...prev, textGenerationData]);
     }
   }, [textGenerationData]);
@@ -68,7 +67,6 @@ function AiResponseComponent() {
         {responseData.length > 0 ? (
           <div className="response-container">
             {responseData.map((data) => {
-              console.log("Client Has Data: ", data)
               switch (data.response.type) {
                 case "joke":
                   return <JokeResponse data={data} />;
