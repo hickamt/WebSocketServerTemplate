@@ -29,14 +29,3 @@
   max-height: 25vh;
   padding: 0.25em;
 }
-
-/* BUTTONS */
-
-.button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 1em;
-  gap: 1em;
-  width: 100%;
-}

@@ -10,6 +10,7 @@ import { v4 as uuid } from "uuid";
 // Components
 import MenuBar from "../menuBar/MenuBar";
 import TextGenerationResponse from "../textGenerationResponse/TextGenerationResponse";
+import ButtonSelection from "../buttonSelection/ButtonSelection";
 
 // Styles
 import "./styles.css";
@@ -64,7 +65,6 @@ function AiResponseComponent() {
     connectionState === "OPEN" && (
       <div className="ai-response-component">
         <MenuBar />
-
         {responseData.length > 0 ? (
           <div className="response-container">
             {responseData.map((data) => {
@@ -79,17 +79,13 @@ function AiResponseComponent() {
         ) : (
           <div className="response-container">Type and send a message</div>
         )}
-
         <textarea
           className="user-input"
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <div className="button-container">
-          <button onClick={handleSubmit}>SUBMIT</button>
-          <button onClick={handleClear}>CLEAR</button>
-        </div>
+        <ButtonSelection />
       </div>
     )
   );
