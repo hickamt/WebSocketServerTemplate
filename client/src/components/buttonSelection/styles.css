@@ -7,10 +7,23 @@
   width: 100%;
 }
 
+.button-container .submit,
+.button-container .clear {
+  border: none;
+  padding: 0.5em;
+  border-radius: 3em;
+  transition: transform 0.3s ease;
+}
+
 .button-container .submit {
   background-color: var(--green);
 }
 
 .button-container .clear {
   background-color: var(--red);
+}
+
+.button-container .submit:hover,
+.button-container .clear:hover {
+  transform: scale(1.1);
 }
