@@ -4,10 +4,13 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  /* background-color: var(--grey); */
   width: 100%;
 }
 
 .menu-bar p:hover {
   border-bottom: 1px solid var(--white);
+}
+
+.settings-icon:hover {
+  transform: scale(1.1);
 }

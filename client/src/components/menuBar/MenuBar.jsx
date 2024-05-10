@@ -6,9 +6,9 @@ import "./styles.css";
 function MenuBar({ isLoading }) {
   return (
     <div className="menu-bar">
-      { !isLoading && <CircleLoadAnimation /> }
-      <h1>Websocket Server Template</h1>
-      <IoSettingsOutline size={20} />
+      { isLoading ? <CircleLoadAnimation /> : <p></p> }
+      <h1>Websocket Template</h1>
+      <IoSettingsOutline className="settings-icon" size={20} />
     </div>
   );
 }
