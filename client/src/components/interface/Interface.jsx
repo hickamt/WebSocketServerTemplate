@@ -25,6 +25,7 @@ const formattedTimestamp = () => {
 };
 
 function AiResponseComponent() {
+  const [isLoading, setIsLoading] = useState(false);
   const { connectionState, textGenerationData, sendTextGenerationRequest } =
     useContext(WebSocketContext);
   const [inputText, setInputText] = useState("");
@@ -42,6 +43,7 @@ function AiResponseComponent() {
   };
 
   const handleSubmit = () => {
+    setIsLoading(true);
     if (connectionState === "CLOSED") {
       console.error(
         "Unable to submit the request. WebSocket connection is closed"
@@ -58,12 +60,13 @@ function AiResponseComponent() {
     // Send a text generation request when the button is clicked
     sendTextGenerationRequest(newRequest);
     setInputText("");
+    setIsLoading(false);
   };
 
   return (
     connectionState === "OPEN" && (
       <div className="ai-response-component">
-        <MenuBar />
+        <MenuBar isLoading={isLoading} />
         {responseData.length > 0 ? (
           <div className="response-container">
             {responseData.map((data) => {

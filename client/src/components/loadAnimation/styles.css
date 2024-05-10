@@ -1,0 +1,19 @@
+.loader {
+  border: 3px solid var(--green); /* Adjust this to change the thickness of the circle */
+  border-top: 3px solid var(--grey);
+  border-radius: 50%;
+  width: 20px; /* Adjust this to change the overall size of the circle */
+  height: 20px; /* Adjust this to change the overall size of the circle */
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
